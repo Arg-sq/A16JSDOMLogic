@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            background: #f5f5f5;
+            padding:20px;
+        }
+        .container{
+            
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1{
+            text-align: center;
+        }
+        .input-section{
+            display: flex;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Techspire Todo</h1>
+        <div class="input-section">
+            <input type="text" id="todoInput" placeholder="Add a new task...">
+            <button >Add</button>
+        </div>
+    </div>
     
 </body>
 </html>
