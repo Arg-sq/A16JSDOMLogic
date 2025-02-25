@@ -57,9 +57,28 @@
         <h1>Techspire Todo</h1>
         <div class="input-section">
             <input type="text" id="todoInput" placeholder="Add a new task...">
-            <button >Add</button>
+            <button onclick=" addTodo()" >Add</button>
         </div>
     </div>
-    
+    <script>
+
+        function addTodo(){
+            const input =document.getElementById("todoInput")
+            const text=input.value.trim()
+            
+            if(text){
+
+                const todo={
+                    id: new Date(),
+                    text,
+                    completed:false,
+                    createdAt:new Date()
+                }
+
+            }
+
+
+        }
+    </script>
 </body>
 </html>
