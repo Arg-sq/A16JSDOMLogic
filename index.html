@@ -59,8 +59,18 @@
             <input type="text" id="todoInput" placeholder="Add a new task...">
             <button onclick=" addTodo()" >Add</button>
         </div>
+
+        <ul id="todolist">
+
+        </ul>
+    
     </div>
     <script>
+
+        function saveTodos(){
+            localStorage.setItem("todos", JSON.stringify(todos));
+        }
+        let todos=JSON.parse(localStorage.getItem("todos")) || []
 
         function addTodo(){
             const input =document.getElementById("todoInput")
@@ -69,16 +79,40 @@
             if(text){
 
                 const todo={
-                    id: new Date(),
+                    id: Date.now(),
                     text,
                     completed:false,
                     createdAt:new Date()
                 }
+                todos.unshift(todo)
+                saveTodos() //local storage addition
+                renderTodos()
 
             }
 
 
         }
+        function renderTodos(){
+            const todolist=document.getElementById("todolist") //this is <ul>
+            todolist.innerHTML=""
+
+            todos.forEach((todo)=>{
+            const li =document.createElement("li")
+            li.className="todo-item"
+            li.id=todo.id
+            li.innerHTML=`
+            <input type="checkbox">
+            <span class="todo-text">${todo.text}</span>
+            <button class="delete-btn">Delete</button>
+            `
+            todolist.appendChild(li)
+
+
+            })
+
+
+        }
+       
     </script>
 </body>
 </html>
