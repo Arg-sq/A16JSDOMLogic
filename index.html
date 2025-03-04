@@ -50,6 +50,28 @@
         button:hover{
             background: #00b3b3;
         }
+        
+        .delete-btn{
+            /* animation: slideIn 0.3s ease; */
+            background: red;
+        }
+        .delete-btn:hover{
+            background-color:rgb(225, 20, 20) ;
+        }
+        .todo-item{
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            background: #f8f8f8;
+            padding:16px;
+        }
+        .todo-item:hover{
+            transform: translateX(5px);
+        }
+        .todo-text{
+            flex:1;
+        }
+
     </style>
 </head>
 <body>
@@ -66,6 +88,7 @@
     
     </div>
     <script>
+                
 
         function saveTodos(){
             localStorage.setItem("todos", JSON.stringify(todos));
@@ -87,6 +110,7 @@
                 todos.unshift(todo)
                 saveTodos() //local storage addition
                 renderTodos()
+                input.value=""
 
             }
 
@@ -98,10 +122,10 @@
 
             todos.forEach((todo)=>{
             const li =document.createElement("li")
-            li.className="todo-item"
+            li.className=`todo-item ${todo.completed? "completed":""}`
             li.id=todo.id
             li.innerHTML=`
-            <input type="checkbox">
+            <input type="checkbox" ${todo.completed? "checked":""}>
             <span class="todo-text">${todo.text}</span>
             <button class="delete-btn">Delete</button>
             `
@@ -113,6 +137,7 @@
 
         }
        
+        renderTodos()
     </script>
 </body>
 </html>
