@@ -64,6 +64,7 @@
             margin-bottom: 6px;
             background: #f8f8f8;
             padding:16px;
+            transition:transform 0.3s,opacity 0.3s ;
         }
         .todo-item:hover{
             transform: translateX(5px);
@@ -90,7 +91,7 @@
     <script>
                 
 
-        function saveTodos(){
+        function saveInLocalStorage(){
             localStorage.setItem("todos", JSON.stringify(todos));
         }
         let todos=JSON.parse(localStorage.getItem("todos")) || []
@@ -108,7 +109,7 @@
                     createdAt:new Date()
                 }
                 todos.unshift(todo)
-                saveTodos() //local storage addition
+                saveInLocalStorage() //local storage addition
                 renderTodos()
                 input.value=""
 
@@ -125,18 +126,32 @@
             li.className=`todo-item ${todo.completed? "completed":""}`
             li.id=todo.id
             li.innerHTML=`
-            <input type="checkbox" ${todo.completed? "checked":""}>
+            <input type="checkbox" 
+           
+            onchange="toggleTodo(${todo.id})"
+            ${todo.completed? "checked":""}>
             <span class="todo-text">${todo.text}</span>
-            <button class="delete-btn">Delete</button>
+            <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
             `
             todolist.appendChild(li)
-
-
             })
-
-
         }
-       
+
+        function toggleTodo(id){
+           
+        todos=todos.map((todo)=> todo.id===id?{...todo,completed:!todo.completed}:todo
+   
+        )
+saveInLocalStorage()
+renderTodos()
+        }
+
+       function deleteTodo(id){
+        todos=todos.filter(todo=>todo.id!==id)
+        saveInLocalStorage()
+        renderTodos()
+
+       }
         renderTodos()
     </script>
 </body>
