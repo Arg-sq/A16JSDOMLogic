@@ -133,8 +133,22 @@
             <span class="todo-text">${todo.text}</span>
             <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
             `
+
+            li.querySelector(".todo-text").addEventListener('dblclick',()=>{
+                startEdit(todo.id,todo.text)
+            })
             todolist.appendChild(li)
             })
+        }
+
+        function startEdit(todoId,currentText){
+            const li=document.getElementById(todoId)
+            const input =document.createElement("input")
+            input.className="edit-input"
+            input.value=currentText
+
+            li.querySelector(".todo-text").replaceWith(input)
+
         }
 
         function toggleTodo(id){
