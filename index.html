@@ -170,6 +170,13 @@
 
                 editTodo(todoId,input.value)
             }
+            input.addEventListener("keypress",(e)=>{
+                console.log(e)
+                if(e.key==="Enter"){
+                    saveEdit()
+                }
+            })
+            input.addEventListener("blur",saveEdit)
 
         }
      
