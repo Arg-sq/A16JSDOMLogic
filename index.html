@@ -72,6 +72,13 @@
         .todo-text{
             flex:1;
         }
+        .edit-input{
+            flex :1;
+            padding: 8px;
+            border :1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
 
     </style>
 </head>
@@ -140,8 +147,18 @@
             todolist.appendChild(li)
             })
         }
+        function editTodo(todoId,newText){
+            todos=todos.map((todo)=>{
+              return  todo.id===todoId?{
+                    ...todo,text:newText
+                }:todo
+            })
+            saveInLocalStorage()
+            renderTodos()
 
+        }
         function startEdit(todoId,currentText){
+            console.log("xiryo")
             const li=document.getElementById(todoId)
             const input =document.createElement("input")
             input.className="edit-input"
@@ -149,7 +166,13 @@
 
             li.querySelector(".todo-text").replaceWith(input)
 
+            const saveEdit=()=>{
+
+                editTodo(todoId,input.value)
+            }
+
         }
+     
 
         function toggleTodo(id){
            
