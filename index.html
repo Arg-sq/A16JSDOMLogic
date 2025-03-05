@@ -18,6 +18,8 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+        /* git tracj test */
+        /* new addition */
         h1{
             text-align: center;
         }
@@ -148,11 +150,11 @@
             })
         }
         function editTodo(todoId,newText){
-            todos=todos.map((todo)=>{
-              return  todo.id===todoId?{
+            todos=todos.map((todo)=>
+                todo.id===todoId?{
                     ...todo,text:newText
                 }:todo
-            })
+            )
             saveInLocalStorage()
             renderTodos()
 
