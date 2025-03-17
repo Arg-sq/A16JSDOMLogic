@@ -104,7 +104,7 @@
             <button onclick=" addTodo()" >Add</button>
         </div>
         <div class="filters">
-            <button class="filter-btn" onclick="filterTodos('all')">All</button>
+            <button class="filter-btn active" onclick="filterTodos('all')">All</button>
             <button class="filter-btn" onclick="filterTodos('pending')">Pending</button>
             <button class="filter-btn" onclick="filterTodos('complete')">Complete</button>
         </div>
@@ -144,8 +144,15 @@
         function renderTodos(){
             const todolist=document.getElementById("todolist") //this is <ul>
             todolist.innerHTML=""
-
-            todos.forEach((todo)=>{
+                console.log("iht")
+            let filterTodos=todos.filter((todo)=>{
+                if(currentFilter==="pending") return !todo.completed
+                if(currentFilter==="complete") return todo.completed
+                // yo muni ko chai else condition for all filter
+                return true
+            })
+            console.log(filterTodos,"filterTodos")
+            filterTodos.forEach((todo)=>{
             const li =document.createElement("li")
             li.className=`todo-item ${todo.completed? "completed":""}`
             li.id=todo.id
@@ -219,6 +226,7 @@ renderTodos()
         document.querySelectorAll('.filter-btn').forEach((btn)=>{
             btn.classList.toggle("active",btn.textContent.toLowerCase()===filter)
         })
+        renderTodos()
 
        }
      
