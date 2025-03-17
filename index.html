@@ -85,6 +85,15 @@
             text-decoration: line-through;
         }
 
+        .filter-btn{
+            background: #f5f5f5;
+            color:black
+        }
+        .filter-btn.active{
+            background: darkcyan;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -95,17 +104,16 @@
             <button onclick=" addTodo()" >Add</button>
         </div>
         <div class="filters">
-            <button class="filter-btn">All</button>
-            <button class="filter-btn">Pending</button>
-            <button class="filter-btn">Complete</button>
+            <button class="filter-btn" onclick="filterTodos('all')">All</button>
+            <button class="filter-btn" onclick="filterTodos('pending')">Pending</button>
+            <button class="filter-btn" onclick="filterTodos('complete')">Complete</button>
         </div>
         <ul id="todolist">
 
         </ul>
-    
     </div>
     <script>
-                
+        let currentFilter="all"  
 
         function saveInLocalStorage(){
             localStorage.setItem("todos", JSON.stringify(todos));
@@ -205,7 +213,16 @@ renderTodos()
         renderTodos()
 
        }
-        renderTodos()
+        
+       function filterTodos(filter){
+        currentFilter=filter
+        document.querySelectorAll('.filter-btn').forEach((btn)=>{
+            btn.classList.toggle("active",btn.textContent===filter)
+        })
+
+       }
+     
+       renderTodos()
     </script>
 </body>
 </html>
