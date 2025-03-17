@@ -217,7 +217,7 @@ renderTodos()
        function filterTodos(filter){
         currentFilter=filter
         document.querySelectorAll('.filter-btn').forEach((btn)=>{
-            btn.classList.toggle("active",btn.textContent===filter)
+            btn.classList.toggle("active",btn.textContent.toLowerCase()===filter)
         })
 
        }
