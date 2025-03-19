@@ -108,6 +108,9 @@
             <button class="filter-btn" onclick="filterTodos('pending')">Pending</button>
             <button class="filter-btn" onclick="filterTodos('complete')">Complete</button>
         </div>
+        <div id="todo-list">
+
+        </div>
         <ul id="todolist">
 
         </ul>
@@ -151,7 +154,7 @@
                 // yo muni ko chai else condition for all filter
                 return true
             })
-            console.log(filterTodos,"filterTodos")
+            // console.log(filterTodos,"filterTodos")
             filterTodos.forEach((todo)=>{
             const li =document.createElement("li")
             li.className=`todo-item ${todo.completed? "completed":""}`
@@ -169,6 +172,8 @@
                 startEdit(todo.id,todo.text)
             })
             todolist.appendChild(li)
+
+            updateStats()
             })
         }
         function editTodo(todoId,newText){
@@ -181,7 +186,7 @@
             renderTodos()
 
         }
-        function startEdit(todoId,currentText){
+        function startEdit(todoId,currentText){ 
             console.log("xiryo")
             const li=document.getElementById(todoId)
             const input =document.createElement("input")
@@ -228,6 +233,13 @@ renderTodos()
         })
         renderTodos()
 
+       }
+       function updateStats(){
+        const total=todos.length
+        const completed=todos.filter((todo)=>todo.completed).length
+        
+        const  pending=total-completed
+        document.getElementById("todo-list").textContent=`Total: ${total} | Pending: ${pending} | Completed:${completed}`
        }
      
        renderTodos()
